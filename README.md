@@ -17,7 +17,7 @@ Be sure you have R (https://cran.r-project.org/) installed with the appropriate 
 - dplyr
 
 ## Using the tool
-To run the tool, you must navigate inside the clone repository. After running it you will see a new PNG file titled with the ice plant gene ID that you queried  
+To run the tool, you must navigate inside the cloned repository. After running it you will see a new PNG file titled with the ice plant gene ID that you queried.
 ```
 # Usage
 Rscript plot_iceplant_expression.r [gene_id]
