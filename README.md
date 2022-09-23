@@ -19,7 +19,8 @@ This repository provides a plotting tool for 72-hour time-course transcriptome p
 ## Downloading data
 Using the terminal, navigate to the folder you want to save the bot in your machine.
 1. Open the terminal
-2. Navigate to the folder using commands such as `cd` For example: `cd Documents`
+2. Navigate to the folder using commands such as `cd` 
+- For example: `cd Documents`
 3. Once you are in the desired folder for your bot run below command: 
 ```bash
 git clone git@github.com:plantgenomicslab/Ice-plant-transcriptome-profiling.git
