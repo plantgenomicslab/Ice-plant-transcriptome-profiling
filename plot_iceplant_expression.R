@@ -1,14 +1,6 @@
 args <- commandArgs(trailingOnly = TRUE)
 
-#suppressWarnings(suppressMessages(library(ggplot2)))
-#suppressWarnings(suppressMessages(library(plyr)))
-#suppressWarnings(suppressMessages(library(Hmisc)))
-#suppressWarnings(suppressMessages(library(extrafont)))
-#suppressWarnings(suppressMessages(library("gridExtra")))
-#suppressWarnings(suppressMessages(library("ggsci")))
-#suppressWarnings(suppressMessages(library(data.table)))
-#suppressWarnings(suppressMessages(library(dplyr)))
-
+# Set repo
 r = getOption("repos")
 r["CRAN"] = "http://cran.us.r-project.org"
 options(repos = r)
@@ -35,11 +27,9 @@ if(grepl("^darwin", R.version$os) == TRUE){
 match_line <- as.numeric(system(paste("gzcat iceplant_TPM_DT_ZT.tab.gz | grep -n ", gene, " | cut -f1 -d:", sep = ""), intern = T))
 } else {
 match_line <- as.numeric(system(paste("zcat iceplant_TPM_DT_ZT.tab.gz | grep -n ", gene, " | cut -f1 -d:", sep = ""), intern = T))
-
-
-
 }
 
+# create input for plot
 headers <- read.csv(gzfile("iceplant_TPM_DT_ZT.tab.gz"), sep = "\t", nrows = 1, header = T)
 total_tpm <- read.csv(gzfile("iceplant_TPM_DT_ZT.tab.gz"), sep = "\t", skip = match_line-1, nrows = 1, header = F)
 colnames(total_tpm) <- colnames(headers)
@@ -88,7 +78,7 @@ theme(legend.text = element_text(size=4),legend.title=element_text(size=4)) +
 scale_colour_manual(values = c("#DC0000B2","#00A087B2")) +
 theme(axis.text.x=element_text(angle=90, size=7))
 
-#print(plot)
+# save print(plot)
 print(paste("Writing plot to:", outpng, sep = " "))
 ggsave (plot, file=outpng, width=18, height=7, units="cm")
 
