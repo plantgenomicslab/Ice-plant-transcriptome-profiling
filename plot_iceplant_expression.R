@@ -1,19 +1,45 @@
 args <- commandArgs(trailingOnly = TRUE)
 
-suppressWarnings(suppressMessages(library(ggplot2)))
-suppressWarnings(suppressMessages(library(plyr)))
-suppressWarnings(suppressMessages(library(Hmisc)))
-suppressWarnings(suppressMessages(library(extrafont)))
-suppressWarnings(suppressMessages(library("gridExtra")))
-suppressWarnings(suppressMessages(library("ggsci")))
-suppressWarnings(suppressMessages(library(data.table)))
-suppressWarnings(suppressMessages(library(dplyr)))
+#suppressWarnings(suppressMessages(library(ggplot2)))
+#suppressWarnings(suppressMessages(library(plyr)))
+#suppressWarnings(suppressMessages(library(Hmisc)))
+#suppressWarnings(suppressMessages(library(extrafont)))
+#suppressWarnings(suppressMessages(library("gridExtra")))
+#suppressWarnings(suppressMessages(library("ggsci")))
+#suppressWarnings(suppressMessages(library(data.table)))
+#suppressWarnings(suppressMessages(library(dplyr)))
 
+r = getOption("repos")
+r["CRAN"] = "http://cran.us.r-project.org"
+options(repos = r)
+
+# Package names
+packages <- c("ggplot2", "plyr", "Hmisc", "gridExtra", "ggsci", "data.table", "dplyr")
+
+# Install packages not yet installed
+installed_packages <- packages %in% rownames(installed.packages())
+if (any(installed_packages == FALSE)) {
+  install.packages(packages[!installed_packages])
+}
+
+# Packages loading
+invisible(lapply(packages, library, character.only = TRUE))
+
+# Set ouput file name
 gene <- args[1]
 outpng <- paste(gene, "_DT_ZT_timecourse.png", sep = "")
 
 # Load single gene from the complete dataset
+
+if(grepl("^darwin", R.version$os) == TRUE){
+match_line <- as.numeric(system(paste("gzcat iceplant_TPM_DT_ZT.tab.gz | grep -n ", gene, " | cut -f1 -d:", sep = ""), intern = T))
+} else {
 match_line <- as.numeric(system(paste("zcat iceplant_TPM_DT_ZT.tab.gz | grep -n ", gene, " | cut -f1 -d:", sep = ""), intern = T))
+
+
+
+}
+
 headers <- read.csv(gzfile("iceplant_TPM_DT_ZT.tab.gz"), sep = "\t", nrows = 1, header = T)
 total_tpm <- read.csv(gzfile("iceplant_TPM_DT_ZT.tab.gz"), sep = "\t", skip = match_line-1, nrows = 1, header = F)
 colnames(total_tpm) <- colnames(headers)
