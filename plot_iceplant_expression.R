@@ -10,12 +10,12 @@ suppressWarnings(suppressMessages(library(data.table)))
 suppressWarnings(suppressMessages(library(dplyr)))
 
 gene <- args[1]
-outpng <- paste(gene, "_timecourse.png", sep = "")
+outpng <- paste(gene, "_DT_ZT_timecourse.png", sep = "")
 
 # Load single gene from the complete dataset
-match_line <- as.numeric(system(paste("grep -n ", gene, " iceplant_TPM_DT_ZT.tab | cut -f1 -d:", sep = ""), intern = T))
-headers <- read.csv("iceplant_TPM_DT_ZT.tab", sep = "\t", nrows = 1, header = T)
-total_tpm <- read.csv("iceplant_TPM_DT_ZT.tab", sep = "\t", skip = match_line-1, nrows = 1, header = F)
+match_line <- as.numeric(system(paste("zcat iceplant_TPM_DT_ZT.tab.gz | grep -n ", gene, " | cut -f1 -d:", sep = ""), intern = T))
+headers <- read.csv(gzfile("iceplant_TPM_DT_ZT.tab.gz"), sep = "\t", nrows = 1, header = T)
+total_tpm <- read.csv(gzfile("iceplant_TPM_DT_ZT.tab.gz"), sep = "\t", skip = match_line-1, nrows = 1, header = F)
 colnames(total_tpm) <- colnames(headers)
 
 # Melt data for plotting and separate treatment and time variables
