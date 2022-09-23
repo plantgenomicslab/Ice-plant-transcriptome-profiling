@@ -23,11 +23,12 @@ outpng <- paste(gene, "_DT_ZT_timecourse.png", sep = "")
 
 # Load single gene from the complete dataset
 
-if(grepl("^darwin", R.version$os) == TRUE){
-match_line <- as.numeric(system(paste("gzcat iceplant_TPM_DT_ZT.tab.gz | grep -n ", gene, " | cut -f1 -d:", sep = ""), intern = T))
-} else {
-match_line <- as.numeric(system(paste("zcat iceplant_TPM_DT_ZT.tab.gz | grep -n ", gene, " | cut -f1 -d:", sep = ""), intern = T))
-}
+#if(grepl("^darwin", R.version$os) == TRUE){
+#match_line <- as.numeric(system(paste("gzcat iceplant_TPM_DT_ZT.tab.gz | grep -n ", gene, " | cut -f1 -d:", sep = ""), intern = T))
+#} else {
+#match_line <- as.numeric(system(paste("zcat iceplant_TPM_DT_ZT.tab.gz | grep -n ", gene, " | cut -f1 -d:", sep = ""), intern = T))
+#}
+match_line <- as.numeric(system(paste("zgrep -n ", gene, " iceplant_TPM_DT_ZT.tab.gz | cut -f1 -d:", sep = ""), intern = T))
 
 # create input for plot
 headers <- read.csv(gzfile("iceplant_TPM_DT_ZT.tab.gz"), sep = "\t", nrows = 1, header = T)
