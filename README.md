@@ -58,13 +58,26 @@ Or
 ```
 nautilus .
 ```
-
+## Output 
 ![plot](./test/Mcr1G11970_DT_ZT_timecourse.png)
+![plot](./test/Mcr1G12970_DT_ZT_timecourse.png)
+![plot](./test/Mcr2G11970_DT_ZT_timecourse.png)
 
 
+## Batch processing
 
-
-
-
-
+### Usage :
+```
+for i in [gene_id] [gene_id] [gene_id] [gene_id] ....
+ do
+  Rscript plot_iceplant_expression.R $i  &
+ done
+```
+### For Example:
+```
+for i in Mcr1G11970 Mcr1G12970 Mcr2G11970
+ do
+  Rscript plot_iceplant_expression.R $i &
+ done
+```
 
