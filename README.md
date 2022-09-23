@@ -27,7 +27,7 @@ git clone git@github.com:plantgenomicslab/Ice-plant-transcriptome-profiling.git
 ```
 
 ## Using the tool
-To run the tool, you must navigate inside the cloned repository such as `cd Ice-plant-transcriptome-profiling`. 
+To run the tool, you must navigate inside the cloned repository such as `cd Ice-plant-transcriptome-profiling`.   
 After running below command you will see a new PNG file titled with the ice plant gene ID that you queried.
 
 ### Usage :
